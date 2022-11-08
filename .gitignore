@@ -1,0 +1,10 @@
+__pycache__/
+
+#train data
+digit_detector/MNIST/
+digit_detector/images/
+digit_detector/results/
+digit_detector/train.py
+
+minimalCMD.txt
+
