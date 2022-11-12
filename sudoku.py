@@ -4,6 +4,7 @@ from time import time
 import matplotlib.pyplot as plt
 from extractSudoku import extract_sudoku
 from extractNumber import extract_number
+from solveSudoku import sudoku_solver
 
 
 def output(a):
@@ -31,12 +32,42 @@ def show_image(image):
     plt.imshow(image)
     plt.show()
 
+def gen_data(grid):
+    f1 = open('data.lp', 'w')
+    for i in range(len(grid[0])):
+        for j in range(len(grid[1])):
+            if(grid[i][j] == 0):
+                continue
+            else:
+                line = 'given(' + str(i) + ',' + str(j) + ',' + str(grid[i][j]) + ').\n'
+                f1.write(line)
+
+    f1.close
+
+
 def main(image_path):
     image = extract_sudoku(image_path)
     # show_image(image)
     grid = extract_number(image)
     print('Sudoku:')
+    # print(len(grid))
+    # print(grid)
+
+    '''
+    validate sudoku # yet to implement this part
+    gen_data
+    solveSudoky
+    '''
+    gen_data(grid)
+    print("\nBefore Solving the Sudoku!")
     display_sudoku(grid.tolist())
+
+    res = sudoku_solver()
+    try:
+        display_sudoku(res.tolist())
+        print("\n Your Sudoku is Solved!")
+    except:
+        print("\nThere are no possible solutions to the given Sudoku\n")
 
     # solution = sudoku_solver(grid)
     # print('Solution:')
@@ -52,13 +83,5 @@ def convert_sec_to_hms(seconds):
     return "%d:%02d:%08d" % (hour, minutes, seconds) 
 
 if __name__ == '__main__':
-   image_path = 'sudoku.jpg'
+   image_path = sys.argv[1]
    main(image_path)
-    # try:
-    #     start_time = time()
-    #     main(image_path = sys.argv[1])
-    #     print("TAT: ", round(time() - start_time, 3))
-    # except:             #    except IndexError:
-    #     fmt = 'usage: {} image_path'
-    #     print(fmt.format(__file__.split('/')[-1]))
-    #     print('[ERROR]: Image not found')
