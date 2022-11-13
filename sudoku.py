@@ -4,7 +4,7 @@ from time import time
 import matplotlib.pyplot as plt
 from extractSudoku import extract_sudoku
 from extractNumber import extract_number
-from solveSudoku import sudoku_solver
+from solveSudoku import sudoku_solver, check_data
 
 
 def output(a):
@@ -49,30 +49,33 @@ def main(image_path):
     image = extract_sudoku(image_path)
     # show_image(image)
     grid = extract_number(image)
-    print('Sudoku:')
-    # print(len(grid))
-    # print(grid)
-
-    '''
-    validate sudoku # yet to implement this part
-    gen_data
-    solveSudoky
-    '''
     gen_data(grid)
+    
     print("\nBefore Solving the Sudoku!")
     display_sudoku(grid.tolist())
 
-    res = sudoku_solver()
+    print("\nWhat sudoku Varient do you wish to Solve:\n")
+    print("  1 : Normal Sudoku \n  2 : Anti-knight Sudoku \n  3 : Sudoku-X")
+    in_val = input("\nChoose a number from the above given options!!\n")
+    
+    if(in_val == 2):
+        print("Solving the Anti-Knight Varient of Sudoku!!")
+        check_data("knightInvalid.lp")
+        res = sudoku_solver("knightSudoku.lp")
+    elif(in_val == 3):
+        print("Solving X-Sudoku!!")
+        check_data("xInvalid.lp")
+        res = sudoku_solver("xsudoku.lp")
+    else:
+        print("Solving your Sudoku!!")
+        check_data("src/invalidSudoku.lp")
+        res = sudoku_solver("src/sudoku_clingo.lp")
     try:
         display_sudoku(res.tolist())
         print("\n Your Sudoku is Solved!")
     except:
         print("\nThere are no possible solutions to the given Sudoku\n")
 
-    # solution = sudoku_solver(grid)
-    # print('Solution:')
-#    print(solution)  
-    # display_sudoku(solution.tolist())
         
 def convert_sec_to_hms(seconds): 
     seconds = seconds % (24 * 3600) 
