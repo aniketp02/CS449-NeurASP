@@ -4,6 +4,10 @@ Course project for CS449
 
 - To demonstrate that reasoning can help to identify perception mistakes by neural networks that violate semantic constraints, which in turn can make perception more robust.
 
+## Team
+- Aniket Pokle (20D070011)
+- Vedang Gupta (200100166)
+
 ## Getting Started
 
 - Setting up the environment
@@ -13,7 +17,7 @@ pip3 install -r requirements.txt
 conda activate myenv
 ```
 
-- To train the model
+- To train the digit recognition model
 
 ```
 cd digit_detector
@@ -32,3 +36,5 @@ python3 sudoku.py <image_path>
 - **Anti-Knight Sudoku** :  No number repeats at a knight move
 - **Sudoku-X** : No number repeats at the diagonals
 
+## Reference
+- https://www.ijcai.org/proceedings/2020/0243.pdf
