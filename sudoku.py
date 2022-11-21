@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from extractSudoku import extract_sudoku
 from extractNumber import extract_number
 from solveSudoku import sudoku_solver, check_data
+from casscade import sudoku_solver1, sudoku_solver2
 
 
 def output(a):
@@ -61,20 +62,23 @@ def main(image_path):
     if(in_val == 2):
         print("Solving the Anti-Knight Varient of Sudoku!!")
         check_data("knightInvalid.lp")
-        res = sudoku_solver("knightSudoku.lp")
+        res = sudoku_solver("knightSudoku.lp", "solve")
     elif(in_val == 3):
         print("Solving X-Sudoku!!")
         check_data("xInvalid.lp")
-        res = sudoku_solver("xsudoku.lp")
+        res = sudoku_solver("xsudoku.lp", "solve")
     else:
         print("Solving your Sudoku!!")
         check_data("src/invalidSudoku.lp")
-        res = sudoku_solver("src/sudoku_clingo.lp")
+        res = sudoku_solver("src/sudoku.lp", "solve")
     try:
         display_sudoku(res.tolist())
         print("\n Your Sudoku is Solved!")
     except:
+        # print(res)
         print("\nThere are no possible solutions to the given Sudoku\n")
+
+    return res
 
         
 def convert_sec_to_hms(seconds): 

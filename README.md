@@ -31,6 +31,12 @@ The model is saved at assets/model.pth
 python3 sudoku.py <image_path>
 ```
 
+## Generating Unique Sudoku
+Solves the sudoku in the image and and recursively removes digits from the solved sudoku till a non-unique sudoku is obtained
+```
+python3 generate_sudoku.py <image_path>
+```
+
 ## Available varients of Sudoku
 
 - **Anti-Knight Sudoku** :  No number repeats at a knight move

@@ -54,19 +54,33 @@ def check_data(file):
             handle1.get()
 
 
-def sudoku_solver(solver):
+def sudoku_solver(solver, type):
     ctl = clingo.Control("0")
     ctl.load("data.lp")
     ctl.load(solver)
     ctl.configuration.solve.models = 0
     ctl.ground([("base", [])])
 
-    with ctl.solve(on_model=lambda m: solve(m), async_=True) as handle:
-        while not handle.wait(0):
-            handle.get()
+    if(type == 'solve'):
+        with ctl.solve(on_model=lambda m: solve(m), async_=True) as handle:
+            while not handle.wait(0):
+                handle.get()
+        
+        print("\nReturning the data of the solved sudoku!\n")
+        return res
     
-    print("\nReturning the data of the solved sudoku!\n")
-    return res
+    elif(type == 'count'):
+        model_count = 0
+        with ctl.solve(yield_=True) as handle:
+            for m in handle: 
+                model_count += 1
+                handle.get()
+        
+        print("\nTotal Models availble are : {}\n".format(model_count))
+        return model_count
+    
+    else:
+        print("\n The specified type is not available!\n")
 
 
 # data = sudoku_solver()

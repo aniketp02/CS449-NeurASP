@@ -48,10 +48,7 @@ def extract_number(sudoku):
     grid = np.zeros([9,9])
     for i in range(9):
         for j in range(9):
-#            image = sudoku[i*50+3:(i+1)*50-3,j*50+3:(j+1)*50-3]
             image = sudoku[i*50:(i+1)*50,j*50:(j+1)*50]
-#            filename = "images/sudoku/file_%d_%d.jpg"%(i, j)
-#            cv2.imwrite(filename, image)
             # print(image.sum())
             if image.sum() > 80000:
                 grid[i][j] = identify_number(image)
