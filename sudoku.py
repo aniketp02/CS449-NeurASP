@@ -1,11 +1,11 @@
 import cv2
 import sys
+import numpy as np
 from time import time
 import matplotlib.pyplot as plt
 from extractSudoku import extract_sudoku
 from extractNumber import extract_number
 from solveSudoku import sudoku_solver, check_data
-from casscade import sudoku_solver1, sudoku_solver2
 
 
 def output(a):
@@ -58,25 +58,26 @@ def main(image_path):
     print("\nWhat sudoku Varient do you wish to Solve:\n")
     print("  1 : Normal Sudoku \n  2 : Anti-knight Sudoku \n  3 : Sudoku-X")
     in_val = input("\nChoose a number from the above given options!!\n")
-    
-    if(in_val == 2):
+    # print(in_val)
+    if(in_val == '2'):
         print("Solving the Anti-Knight Varient of Sudoku!!")
-        check_data("knightInvalid.lp")
-        res = sudoku_solver("knightSudoku.lp", "solve")
-    elif(in_val == 3):
+        check_data("src/knightInvalid.lp")
+        res = sudoku_solver("src/knightSudoku.lp", "solve")
+    elif(in_val == '3'):
         print("Solving X-Sudoku!!")
-        check_data("xInvalid.lp")
-        res = sudoku_solver("xsudoku.lp", "solve")
+        check_data("src/xInvalid.lp")
+        res = sudoku_solver("src/xsudoku.lp", "solve")
     else:
         print("Solving your Sudoku!!")
         check_data("src/invalidSudoku.lp")
         res = sudoku_solver("src/sudoku.lp", "solve")
-    try:
-        display_sudoku(res.tolist())
-        print("\n Your Sudoku is Solved!")
-    except:
-        # print(res)
+       
+    if(np.all(res == 0)):
         print("\nThere are no possible solutions to the given Sudoku\n")
+        return res
+
+    display_sudoku(res)
+    print("\n Your Sudoku is Solved!")
 
     return res
 
