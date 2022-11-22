@@ -33,8 +33,12 @@ python3 sudoku.py <image_path>
 
 ## Generating Unique Sudoku
 Solves the sudoku in the image and and recursively removes digits from the solved sudoku till a non-unique sudoku is obtained
+
+available options are:
+1) `naive`
+2) `lrtb`
 ```
-python3 generate_sudoku.py <image_path>
+python3 generate_sudoku.py option
 ```
 
 ## Available varients of Sudoku
