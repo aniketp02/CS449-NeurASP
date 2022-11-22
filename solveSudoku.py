@@ -76,7 +76,7 @@ def sudoku_solver(solver, type):
                 model_count += 1
                 handle.get()
         
-        print("\nTotal Models availble are : {}\n".format(model_count))
+        # print("\nTotal Models availble are : {}\n".format(model_count))
         return model_count
     
     else:
